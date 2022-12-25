@@ -3,35 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="https://kit.fontawesome.com/44d763aa33.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<form th:action="main" th:method="post">
-    <label>
-        <input type="text" name="query">
-    </label>
+<!--<form th:action="main" th:method="post">-->
+<!--    <label>-->
+<!--        <input type="text" name="query">-->
+<!--    </label>-->
 
-    <button type="submit">ㄲ</button>
+<!--    <button type="submit">ㄲ</button>-->
+<!--</form>-->
+
+<form th:action="main" th:method="post">
+
+<label>
+    <textarea class="query-content" th:type="text" name="query"  placeholder="쿼리를 입력하세요." style="resize: none"></textarea>
+</label>
+
+<button id="query-btn" class="btn btn-success" type="submit">등록</button>
+
 </form>
 
+<table class="table">
+    <tr>
+        <th:block th:each="key: ${keys}">
+            <th class="active" style="margin-right: 10px;" th:text="${key}">  </th>
+        </th:block>
+    </tr>
+    <tr th:each="map: ${result}">
+        <th:block th:each="value: ${map}">
+            <td th:text="${value.value}"></td>
+        </th:block>
+    </tr>
+</table>
 
-<div style="border: 1px solid black;">
-    <span th:each="key: ${keys}">
-        <span th:text="${key}"></span>
-        <span> || </span>
-    </span>
 
-    <div th:each="map: ${result}">
-        <span th:each="value: ${map}">
-            <span th:text="${value.value}"></span>
-        </span>
-    </div>
-</div>
+<!--<div class="container" style="border: 1px solid black;">-->
+
+<!--    <div style="text-align: center">-->
+<!--        <span th:each="key: ${keys}">-->
+<!--            <span style="font-size: 15px;" th:text="${key}"></span>-->
+<!--            <span>  </span>-->
+<!--        </span>-->
+<!--    </div>-->
+
+<!--    <div th:each="map: ${result}">-->
+<!--        <span th:each="value: ${map}">-->
+<!--            <span th:text="${value.value}"></span>-->
+<!--        </span>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 </body>
+
+<script th:inline="javascript">
+
+    // $(document).ready(function (e) {
+    //
+    //     $('#query-btn').click(function () {
+    //
+    //         let value = {
+    //             query: $('.query-content').val()
+    //         }
+    //
+    //         $.ajax({
+    //
+    //             url: '/main',
+    //             type: "post",
+    //             data: JSON.stringify(value),
+    //             contentType: "application/json; charset=utf-8",
+    //             dataType: "text",
+    //             async: false,
+    //             success: function (result) {
+    //
+    //                 $('#hihi').load(location.href + " #hihi");
+    //             }
+    //         })
+    //     });
+    //     });
+
+
+</script>
 </html>
