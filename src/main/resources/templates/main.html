@@ -9,53 +9,33 @@
 </head>
 <body>
 
-<!--<form th:action="main" th:method="post">-->
-<!--    <label>-->
-<!--        <input type="text" name="query">-->
-<!--    </label>-->
 
-<!--    <button type="submit">ㄲ</button>-->
-<!--</form>-->
-
-<form th:action="main" th:method="post">
-
-<label>
-    <textarea class="query-content" th:type="text" name="query"  placeholder="쿼리를 입력하세요." style="resize: none"></textarea>
-</label>
-
-<button id="query-btn" class="btn btn-success" type="submit">등록</button>
-
-</form>
-
-<table class="table">
-    <tr>
-        <th:block th:each="key: ${keys}">
-            <th class="active" style="margin-right: 10px;" th:text="${key}">  </th>
-        </th:block>
-    </tr>
-    <tr th:each="map: ${result}">
-        <th:block th:each="value: ${map}">
-            <td th:text="${value.value}"></td>
-        </th:block>
-    </tr>
-</table>
+    <form class="container" th:action="main" th:method="post" th:object="${dto}">
 
 
-<!--<div class="container" style="border: 1px solid black;">-->
+            <input class="form-control" th:field="*{query}"   name="query" th:type="text" placeholder="쿼리를 입력하세요." >
 
-<!--    <div style="text-align: center">-->
-<!--        <span th:each="key: ${keys}">-->
-<!--            <span style="font-size: 15px;" th:text="${key}"></span>-->
-<!--            <span>  </span>-->
-<!--        </span>-->
-<!--    </div>-->
+        <p th:if ="${#fields.hasErrors('query')}" th:errors="*{query}"> </p>
+        <button id="query-btn" class="btn btn-success" type="submit">검색</button>
 
-<!--    <div th:each="map: ${result}">-->
-<!--        <span th:each="value: ${map}">-->
-<!--            <span th:text="${value.value}"></span>-->
-<!--        </span>-->
-<!--    </div>-->
-<!--</div>-->
+    </form>
+
+
+<div class="container-fluid">
+    <table class="table text-center">
+        <tr>
+            <th:block th:each="key: ${keys}">
+                <th class="active text-center" style="font-size: 10px" th:text="${key}">  </th>
+            </th:block>
+        </tr>
+        <tr th:each="map: ${result}">
+            <th:block th:each="value: ${map}">
+                <td style="font-size: 10px;" th:text="${value.value}"></td>
+            </th:block>
+        </tr>
+    </table>
+</div>
+
 
 
 </body>
