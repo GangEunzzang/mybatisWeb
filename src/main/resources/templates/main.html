@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://kit.fontawesome.com/44d763aa33.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<form action="/query" th:method="post">
+<form th:action="main" th:method="post">
     <label>
         <input type="text" name="query">
     </label>
@@ -15,15 +19,18 @@
 </form>
 
 
-<div>
+<div style="border: 1px solid black;">
     <span th:each="key: ${keys}">
         <span th:text="${key}"></span>
         <span> || </span>
     </span>
+
+    <div th:each="map: ${result}">
+        <span th:each="value: ${map}">
+            <span th:text="${value.value}"></span>
+        </span>
+    </div>
 </div>
-
-
-
 
 
 </body>
