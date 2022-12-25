@@ -14,7 +14,13 @@ public class QueryRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public List<Map<String, Object>> getQuery(String query) {
-        return jdbcTemplate.queryForList(query);
+        try{
+            return jdbcTemplate.queryForList(query);
+        } catch (Exception e) {
+            return null;
+        }
+
+
     }
 
 }
