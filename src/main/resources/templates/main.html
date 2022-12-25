@@ -10,12 +10,11 @@
 <body>
 
 
-    <form class="container" th:action="main" th:method="post" th:object="${dto}">
+    <form class="container" th:object="${dto}" th:action="main" th:method="post" >
 
+            <input class="form-control" th:field="*{query}"  name="query" th:type="text" placeholder="쿼리를 입력하세요." >
 
-            <input class="form-control" th:field="*{query}"   name="query" th:type="text" placeholder="쿼리를 입력하세요." >
-
-        <p th:if ="${#fields.hasErrors('query')}" th:errors="*{query}"> </p>
+        <p th:if ="${#fields.hasErrors('query')}" th:errors="*{query}" style="color: red"> </p>
         <button id="query-btn" class="btn btn-success" type="submit">검색</button>
 
     </form>

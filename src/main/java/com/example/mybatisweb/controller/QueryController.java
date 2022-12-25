@@ -26,29 +26,30 @@ public class QueryController {
     private final QueryRepository queryRepository;
 
     @GetMapping({"", "main"})
-    public String main() {
+    public String main(@ModelAttribute("dto") QueryDTO dto) {
         return "main";
     }
 
     @PostMapping("main")
     public String select(@ModelAttribute("dto") @Valid QueryDTO dto, BindingResult bindingResult, Model model ) {
 
+        if (bindingResult.hasErrors()) {
+            System.out.println("bindingResult = " + bindingResult);
+            return "main";
+        }
 
         if (dto.getQuery().trim().toLowerCase().charAt(0) != 's' ) {
             bindingResult.addError(new FieldError("query", "query", "SELECT문만 가능합니다."));
-        }
-
-
-
-        if (bindingResult.hasErrors()) {
-            System.out.println("bindingResult = " + bindingResult);
             return "main";
         }
 
         System.out.println(dto.getQuery());
 
         List<Map<String, Object>> stringObjectMap = queryRepository.getQuery(dto.getQuery());
-
+        if (stringObjectMap == null) {
+            bindingResult.addError(new FieldError("query", "query", "결과가 없습니다."));
+            return "main";
+        }
 
         List<String> keyListOfQueryMap = new ArrayList<>(stringObjectMap.get(0).keySet());
 
